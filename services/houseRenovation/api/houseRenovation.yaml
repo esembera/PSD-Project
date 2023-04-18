@@ -2,8 +2,8 @@ openapi: 3.0.3
 info:
   title: House Renovation Company API
   description:
-    "API for managing renovation requests, quotations, and job completion\
-    \ notifications"
+    API for managing renovation requests, quotations, and job completion\
+    \ notifications
   version: 1.0.0
 servers:
   - url: http://localhost:8080

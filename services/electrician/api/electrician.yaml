@@ -1,10 +1,10 @@
 openapi: 3.0.3
 info:
   title: Electrician API
-  description: API documentation for a electrician
+  description: API documentation for a electrician's company
   version: 1.0.0
 servers:
-- url: http://localhost:8080/
+  - url: http://localhost:8080/
 paths:
   /services:
     get:
@@ -17,7 +17,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ElectricianServices'
+                $ref: "#/components/schemas/ElectricianServices"
       x-swagger-router-controller: Default
   /services/{nameOfService}:
     get:
@@ -25,40 +25,40 @@ paths:
       description: Retrieve the details of the requested electrician service.
       operationId: servicesNameOfServiceGET
       parameters:
-      - name: nameOfService
-        in: path
-        description: Name of the electrician service
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
+        - name: nameOfService
+          in: path
+          description: Name of the electrician service
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
       responses:
         "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ServiceDetails'
+                $ref: "#/components/schemas/ServiceDetails"
       x-swagger-router-controller: Default
     post:
       summary: Request Service
       description: Request an electrician service and receive a confirmation ID.
       operationId: servicesNameOfServicePOST
       parameters:
-      - name: nameOfService
-        in: path
-        description: Name of the electrician service
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
+        - name: nameOfService
+          in: path
+          description: Name of the electrician service
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RenovationRequest'
+              $ref: "#/components/schemas/RenovationRequest"
         required: true
       responses:
         "200":
@@ -66,43 +66,44 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: "#/components/schemas/inline_response_200"
       x-swagger-router-controller: Default
   /service_request/{id}:
     get:
       summary: Get a service request status update
-      description: Get information about the status of your previously submitted service
+      description:
+        Get information about the status of your previously submitted service
         request
       operationId: service_requestIdGET
       parameters:
-      - name: id
-        in: path
-        description: ID of the service request
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
-          format: int64
+        - name: id
+          in: path
+          description: ID of the service request
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
       responses:
         "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ServiceRequestStatus'
+                $ref: "#/components/schemas/ServiceRequestStatus"
         "404":
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
       x-swagger-router-controller: Default
   /confirmation/{id}:
     post:
@@ -110,20 +111,20 @@ paths:
       description: Endpoint for confirming a quotation when update is needed
       operationId: confirmationIdPOST
       parameters:
-      - name: id
-        in: path
-        description: The ID of the quotation to confirm
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
-          format: int64
+        - name: id
+          in: path
+          description: The ID of the quotation to confirm
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/confirmation_id_body'
+              $ref: "#/components/schemas/confirmation_id_body"
         required: true
       responses:
         "200":
@@ -133,29 +134,29 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
         "404":
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
       x-swagger-router-controller: Default
 components:
   schemas:
     RenovationRequest:
       required:
-      - budget
-      - customer_email
-      - customer_name
-      - description
-      - renovation_startDate
+        - budget
+        - customer_email
+        - customer_name
+        - description
+        - renovation_startDate
       type: object
       properties:
         customer_name:
@@ -199,22 +200,22 @@ components:
       items:
         type: string
         enum:
-        - Electrical installations
-        - Electrical repairs
-        - Electrical maintenance
-        - Circuit troubleshooting and repair
-        - Lighting installation and repair
-        - Outlet and switch installation and repair
-        - Electrical panel upgrades
-        - Rewiring and electrical upgrades
-        - Generator installation and repair
-        - Electrical safety inspections
-        - Energy-efficient lighting installation
-        - Home automation system installation
-        - Security system installation and repair
-        - Data and network cabling installation
-        - Electric vehicle charging station installation
-        - Electrical consultation and advice
+          - Electrical installations
+          - Electrical repairs
+          - Electrical maintenance
+          - Circuit troubleshooting and repair
+          - Lighting installation and repair
+          - Outlet and switch installation and repair
+          - Electrical panel upgrades
+          - Rewiring and electrical upgrades
+          - Generator installation and repair
+          - Electrical safety inspections
+          - Energy-efficient lighting installation
+          - Home automation system installation
+          - Security system installation and repair
+          - Data and network cabling installation
+          - Electric vehicle charging station installation
+          - Electrical consultation and advice
     ServiceRequestStatus:
       type: object
       properties:
@@ -222,21 +223,22 @@ components:
           type: string
           description: Status of a service request
           enum:
-          - PENDING
-          - REJECTED
-          - TAKEN_IN_CHARGE
-          - COMPLETED
-          - WAITING_FOR_UPDATE
+            - PENDING
+            - REJECTED
+            - TAKEN_IN_CHARGE
+            - COMPLETED
+            - WAITING_FOR_UPDATE
         details:
           type: string
-          description: This field varies depending on the status. For example - quotation
+          description:
+            This field varies depending on the status. For example - quotation
             is sent with WAITING_FOR_UPDATE status.
       example:
         details: details
         status: PENDING
     Error:
       required:
-      - errorMessage
+        - errorMessage
       type: object
       properties:
         errorMessage:
@@ -249,8 +251,8 @@ components:
           type: string
           description: The confirmation message for the quotation
           enum:
-          - "YES"
-          - "NO"
+            - "YES"
+            - "NO"
     inline_response_200:
       type: object
       properties:

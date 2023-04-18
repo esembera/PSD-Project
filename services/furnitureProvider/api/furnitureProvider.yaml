@@ -1,60 +1,63 @@
 openapi: 3.0.3
 info:
-  title: Constructor API
-  description: API documentation for a constructor company
+  title: Furniture Provider API
+  description: API documentation for a furniture provider's company
   version: 1.0.0
 servers:
-- url: http://localhost:8080/
+  - url: http://localhost:8080/
 paths:
   /services:
     get:
-      summary: Get Constructor Services
-      description: Retrieve a list of available constructor services.
+      summary: Get Furniture Provider Services
+      description: Retrieve a list of available furniture provider services.
+      operationId: servicesGET
       responses:
         "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConstructorServices'
+                $ref: "#/components/schemas/FurnitureProviderServices"
       x-swagger-router-controller: Default
   /services/{nameOfService}:
     get:
       summary: Get Service Details
-      description: Retrieve the details of the requested constructor service.
+      description: Retrieve the details of the requested furniture provider service.
+      operationId: servicesNameOfServiceGET
       parameters:
-      - name: nameOfService
-        in: path
-        description: Name of the constructor service
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
+        - name: nameOfService
+          in: path
+          description: Name of the furniture provider service
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
       responses:
         "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ServiceDetails'
+                $ref: "#/components/schemas/ServiceDetails"
     post:
       summary: Request Service
-      description: Request a constructor service and receive a confirmation ID.
+      description: Request a furniture provider service and receive a confirmation ID.
+      operationId: servicesNameOfServicePOST
       parameters:
-      - name: nameOfService
-        in: path
-        description: Name of the constructor service
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
+        - name: nameOfService
+          in: path
+          description: Name of the furniture provider service
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ServiceRequest'
+              $ref: "#/components/schemas/ServiceRequest"
         required: true
       responses:
         "200":
@@ -62,59 +65,61 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: "#/components/schemas/inline_response_200"
   /service_request/{id}:
     get:
       summary: Get a service request status update
       description: Get information about the status of your previously submitted service request
+      operationId: service_requestIdGET
       parameters:
-      - name: id
-        in: path
-        description: ID of the service request
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
-          format: int64
+        - name: id
+          in: path
+          description: ID of the service request
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
       responses:
         "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ServiceRequestStatus'
+                $ref: "#/components/schemas/ServiceRequestStatus"
         "404":
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
   /confirmation/{id}:
     post:
       summary: Confirm Quotation
       description: Endpoint for confirming a quotation when update is needed
+      operationId: confirmationIdPOST
       parameters:
-      - name: id
-        in: path
-        description: The ID of the quotation to confirm
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
-          format: int64
+        - name: id
+          in: path
+          description: The ID of the quotation to confirm
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/confirmation_id_body'
+              $ref: "#/components/schemas/confirmation_id_body"
         required: true
       responses:
         "200":
@@ -124,28 +129,28 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
         "404":
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
         "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
 components:
   schemas:
     ServiceRequest:
       required:
-      - budget
-      - customer_email
-      - customer_name
-      - description
-      - service_startDate
+        - budget
+        - customer_email
+        - customer_name
+        - description
+        - service_startDate
       type: object
       properties:
         customer_name:
@@ -153,13 +158,13 @@ components:
           description: The name of the customer
         customer_email:
           type: string
-          description: The name of the customer
+          description: The email of the customer
         description:
           type: string
-          description: A brief description of the renovation work
+          description: A brief description of the work to do
         service_startDate:
           type: string
-          description: The deadline for the renovation project
+          description: The deadline for the work to do
           format: date-time
         pictures:
           type: array
@@ -184,31 +189,25 @@ components:
         description: description
         durationOfWork: durationOfWork
         serviceName: serviceName
-    ConstructorServices:
+    FurnitureProviderServices:
       type: array
       items:
         type: string
         enum:
-        - Demolition
-        - Excavation
-        - Concrete work
-        - Masonry
-        - Carpentry
-        - Roofing
-        - Plumbing
-        - Electrical work
-        - HVAC installation
-        - Painting
-        - Flooring installation
-        - Tile setting
-        - Drywall installation
-        - Insulation installation
-        - Landscaping
-        - Renovations
-        - Remodeling
-        - Foundation repair
-        - Welding
-        - Siding installation
+          - Furniture sales
+          - Custom furniture design
+          - Furniture rental
+          - Furniture delivery and assembly
+          - Furniture repair and restoration
+          - Furniture refinishing
+          - Upholstery services
+          - Furniture sourcing and procurement
+          - Furniture installation
+          - Furniture space planning
+          - Furniture customization
+          - Furniture removal and disposal
+          - Furniture leasing
+          - Furniture trade-ins and buy-backs
 
     ServiceRequestStatus:
       type: object
@@ -217,11 +216,11 @@ components:
           type: string
           description: Status of a service request
           enum:
-          - PENDING
-          - REJECTED
-          - TAKEN_IN_CHARGE
-          - COMPLETED
-          - WAITING_FOR_UPDATE
+            - PENDING
+            - REJECTED
+            - TAKEN_IN_CHARGE
+            - COMPLETED
+            - WAITING_FOR_UPDATE
         details:
           type: string
           description: This field varies depending on the status. For example - quotation is sent with WAITING_FOR_UPDATE status.
@@ -230,7 +229,7 @@ components:
         status: PENDING
     Error:
       required:
-      - errorMessage
+        - errorMessage
       type: object
       properties:
         errorMessage:
@@ -243,8 +242,8 @@ components:
           type: string
           description: The confirmation message for the quotation
           enum:
-          - "YES"
-          - "NO"
+            - "YES"
+            - "NO"
     inline_response_200:
       type: object
       properties:
