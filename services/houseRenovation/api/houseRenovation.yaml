@@ -1,0 +1,234 @@
+openapi: 3.0.3
+info:
+  title: House Renovation Company API
+  description:
+    "API for managing renovation requests, quotations, and job completion\
+    \ notifications"
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+paths:
+  /renovation_request:
+    post:
+      summary: Submit a renovation request
+      description: Allows customers to submit a renovation request
+      operationId: renovation_requestPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RenovationRequest"
+        required: true
+      responses:
+        "201":
+          description: Request submitted successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RenovationRequestResponse"
+        "400":
+          description: Bad request
+        "500":
+          description: Internal server error
+      x-swagger-router-controller: Default
+  /renovation_request/{id}:
+    get:
+      summary: Get a renovation request status update
+      description:
+        Get information about the status of your previously-submitted renovation
+        request
+      operationId: renovation_requestIdGET
+      parameters:
+        - name: id
+          in: path
+          description: ID of the renovation request
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RenovationRequestStatus"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+      x-swagger-router-controller: Default
+    delete:
+      summary: Delete a renovation request
+      description: "Delete a renovation request, but only if it's still pending"
+      operationId: renovation_requestIdDELETE
+      parameters:
+        - name: id
+          in: path
+          description: ID of the renovation request
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+      x-swagger-router-controller: Default
+  /confirmation/{id}:
+    post:
+      summary: Confirm Quotation
+      description: Endpoint for confirming a quotation when update is needed.
+      operationId: confirmationIdPOST
+      parameters:
+        - name: id
+          in: path
+          description: The ID of the quotation to confirm
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/confirmation_id_body"
+        required: true
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+      x-swagger-router-controller: Default
+components:
+  schemas:
+    RenovationRequest:
+      required:
+        - budget
+        - customer_email
+        - customer_name
+        - description
+        - pictures
+        - renovation_endDate
+        - renovation_startDate
+      type: object
+      properties:
+        customer_name:
+          type: string
+          description: The name of the customer
+        customer_email:
+          type: string
+          description: The name of the customer
+        description:
+          type: string
+          description: A brief description of the renovation work
+        renovation_startDate:
+          type: string
+          description: The deadline for the renovation project
+          format: date-time
+        renovation_endDate:
+          type: string
+          description: The deadline for the renovation project
+          format: date-time
+        budget:
+          type: integer
+          description: The budget for the renovation work
+        pictures:
+          type: array
+          description: Pictures representing the state of the house
+          items:
+            type: string
+            format: binary
+    RenovationRequestResponse:
+      type: object
+      properties:
+        request_id:
+          type: integer
+          description: The unique ID of the submitted renovation request
+        status:
+          type: string
+          description: The status of the request submission
+          enum:
+            - PENDING
+            - REJECTED
+      example:
+        request_id: 0
+        status: PENDING
+    RenovationRequestStatus:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Status of a renovation request
+          enum:
+            - PENDING
+            - REJECTED
+            - TAKEN_IN_CHARGE
+            - COMPLETED
+            - WAITING_FOR_UPDATE
+        details:
+          type: string
+          description:
+            This field varies depending on the status. For example - quotation
+            is sent with WAITING_FOR_UPDATE status.
+      example:
+        details: details
+        status: PENDING
+    Error:
+      required:
+        - errorMessage
+      type: object
+      properties:
+        errorMessage:
+          type: string
+          description: The error message that describes the error.
+    confirmation_id_body:
+      type: object
+      properties:
+        decision:
+          type: string
+          description: The confirmation message for the quotation
+          enum:
+            - "YES"
+            - "NO"
