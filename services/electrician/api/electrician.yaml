@@ -1,14 +1,14 @@
 openapi: 3.0.3
 info:
-  title: Plumber API
-  description: API documentation for a plumber
+  title: Electrician API
+  description: API documentation for a electrician
   version: 1.0.0
 servers:
 - url: http://localhost:8080/
 paths:
   /services:
     get:
-      summary: Get Plumbing Services
+      summary: Get Electrician Services
       description: Retrieve a list of available plumbing services.
       operationId: servicesGET
       responses:
@@ -22,12 +22,12 @@ paths:
   /services/{nameOfService}:
     get:
       summary: Get Service Details
-      description: Retrieve the details of the requested plumbing service.
+      description: Retrieve the details of the requested electrician service.
       operationId: servicesNameOfServiceGET
       parameters:
       - name: nameOfService
         in: path
-        description: Name of the plumbing service
+        description: Name of the electrician service
         required: true
         style: simple
         explode: false
@@ -43,12 +43,12 @@ paths:
       x-swagger-router-controller: Default
     post:
       summary: Request Service
-      description: Request a plumbing service and receive a confirmation ID.
+      description: Request an electrician service and receive a confirmation ID.
       operationId: servicesNameOfServicePOST
       parameters:
       - name: nameOfService
         in: path
-        description: Name of the plumbing service
+        description: Name of the electrician service
         required: true
         style: simple
         explode: false
@@ -68,16 +68,16 @@ paths:
               schema:
                 $ref: '#/components/schemas/inline_response_200'
       x-swagger-router-controller: Default
-  /renovation_request/{id}:
+  /service_request/{id}:
     get:
-      summary: Get a renovation request status update
-      description: Get information about the status of your previously submitted renovation
+      summary: Get a service request status update
+      description: Get information about the status of your previously submitted service
         request
-      operationId: renovation_requestIdGET
+      operationId: service_requestIdGET
       parameters:
       - name: id
         in: path
-        description: ID of the renovation request
+        description: ID of the service request
         required: true
         style: simple
         explode: false
@@ -90,7 +90,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RenovationRequestStatus'
+                $ref: '#/components/schemas/ServiceRequestStatus'
         "404":
           description: Not Found
           content:
@@ -107,7 +107,7 @@ paths:
   /confirmation/{id}:
     post:
       summary: Confirm Quotation
-      description: Endpoint for confirming a quotation when update is needed.
+      description: Endpoint for confirming a quotation when update is needed
       operationId: confirmationIdPOST
       parameters:
       - name: id
@@ -199,22 +199,28 @@ components:
       items:
         type: string
         enum:
-        - Plumbing installation
-        - Plumbing repair
-        - Drain cleaning
-        - Pipe repair and replacement
-        - Water heater services
-        - Plumbing inspections
-        - Emergency plumbing services
-        - Gas line services
-        - Backflow prevention
-        - Plumbing consultations
-    RenovationRequestStatus:
+        - Electrical installations
+        - Electrical repairs
+        - Electrical maintenance
+        - Circuit troubleshooting and repair
+        - Lighting installation and repair
+        - Outlet and switch installation and repair
+        - Electrical panel upgrades
+        - Rewiring and electrical upgrades
+        - Generator installation and repair
+        - Electrical safety inspections
+        - Energy-efficient lighting installation
+        - Home automation system installation
+        - Security system installation and repair
+        - Data and network cabling installation
+        - Electric vehicle charging station installation
+        - Electrical consultation and advice
+    ServiceRequestStatus:
       type: object
       properties:
         status:
           type: string
-          description: Status of a renovation request
+          description: Status of a service request
           enum:
           - PENDING
           - REJECTED
