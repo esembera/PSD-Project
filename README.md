@@ -8,6 +8,9 @@ Based on the requests of the client (the householder) contact them and select th
 - Carmine Alberto, 10560934
 - Ernest Šembera, 10920794
 
+##Thought processes, notes
+https://docs.google.com/document/d/12CEGEP-12oZSZT4RzRTu5NgYURmtXNZGeAaubvGmLhI/edit?usp=sharing
+
 ## Choreographed process
 
 (this is a sample text. Revise according to your process)
