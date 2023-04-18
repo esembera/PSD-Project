@@ -21,12 +21,12 @@ place here an image of the BPMN Choreography diagram
 
 # Third party services
 
-- plumber
-- electrician
-- constructor
-- designer
-- painter
-- furniture provider
+- Plumber
+- Electrician
+- Constructor
+- Designer
+- Painter
+- Furniture provider
 
 ## Collaboration Diagram
 
