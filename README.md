@@ -1,7 +1,7 @@
 # ReNewHouse
 
-We want to model the service offered by a house renovation company to its clients. The house renovation company service relies on the services offered by a set of plumbers, electrician, constructors, painters, furniture providers and designers
-Based on the requests of the client (the householder) contact them and select the best ones
+We want to model the service offered by a house renovation company to its clients. The house renovation company service relies on the services offered by a set of plumbers, electrician, constructors, painters, furniture providers and designers.\
+Based on the requests of the client (the householder), contact them and select the best ones.
 
 ## Members:
 
