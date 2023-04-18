@@ -1,33 +1,31 @@
 openapi: 3.0.3
 info:
-  title: Electrician API
-  description: API documentation for a electrician
+  title: Furniture Provider API
+  description: API documentation for a constructor company
   version: 1.0.0
 servers:
 - url: http://localhost:8080/
 paths:
   /services:
     get:
-      summary: Get Electrician Services
-      description: Retrieve a list of available electrician services.
-      operationId: servicesGET
+      summary: Get Furniture Provider Services
+      description: Retrieve a list of available furniture provider services.
       responses:
         "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ElectricianServices'
+                $ref: '#/components/schemas/FurnitureProviderServices'
       x-swagger-router-controller: Default
   /services/{nameOfService}:
     get:
       summary: Get Service Details
-      description: Retrieve the details of the requested electrician service.
-      operationId: servicesNameOfServiceGET
+      description: Retrieve the details of the requested furniture provider service.
       parameters:
       - name: nameOfService
         in: path
-        description: Name of the electrician service
+        description: Name of the furniture provider service
         required: true
         style: simple
         explode: false
@@ -40,15 +38,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServiceDetails'
-      x-swagger-router-controller: Default
     post:
       summary: Request Service
-      description: Request an electrician service and receive a confirmation ID.
-      operationId: servicesNameOfServicePOST
+      description: Request a furniture provider service and receive a confirmation ID.
       parameters:
       - name: nameOfService
         in: path
-        description: Name of the electrician service
+        description: Name of the furniture provider service
         required: true
         style: simple
         explode: false
@@ -58,7 +54,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RenovationRequest'
+              $ref: '#/components/schemas/ServiceRequest'
         required: true
       responses:
         "200":
@@ -67,13 +63,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/inline_response_200'
-      x-swagger-router-controller: Default
   /service_request/{id}:
     get:
       summary: Get a service request status update
-      description: Get information about the status of your previously submitted service
-        request
-      operationId: service_requestIdGET
+      description: Get information about the status of your previously submitted service request
       parameters:
       - name: id
         in: path
@@ -103,12 +96,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-      x-swagger-router-controller: Default
   /confirmation/{id}:
     post:
       summary: Confirm Quotation
       description: Endpoint for confirming a quotation when update is needed
-      operationId: confirmationIdPOST
       parameters:
       - name: id
         in: path
@@ -146,16 +137,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-      x-swagger-router-controller: Default
 components:
   schemas:
-    RenovationRequest:
+    ServiceRequest:
       required:
       - budget
       - customer_email
       - customer_name
       - description
-      - renovation_startDate
+      - service_startDate
       type: object
       properties:
         customer_name:
@@ -163,13 +153,13 @@ components:
           description: The name of the customer
         customer_email:
           type: string
-          description: The name of the customer
+          description: The email of the customer
         description:
           type: string
-          description: A brief description of the renovation work
-        renovation_startDate:
+          description: A brief description of the work to do
+        service_startDate:
           type: string
-          description: The deadline for the renovation project
+          description: The deadline for the work to do
           format: date-time
         pictures:
           type: array
@@ -194,27 +184,26 @@ components:
         description: description
         durationOfWork: durationOfWork
         serviceName: serviceName
-    ElectricianServices:
+    FurnitureProviderServices:
       type: array
       items:
         type: string
         enum:
-        - Electrical installations
-        - Electrical repairs
-        - Electrical maintenance
-        - Circuit troubleshooting and repair
-        - Lighting installation and repair
-        - Outlet and switch installation and repair
-        - Electrical panel upgrades
-        - Rewiring and electrical upgrades
-        - Generator installation and repair
-        - Electrical safety inspections
-        - Energy-efficient lighting installation
-        - Home automation system installation
-        - Security system installation and repair
-        - Data and network cabling installation
-        - Electric vehicle charging station installation
-        - Electrical consultation and advice
+        - Furniture sales
+        - Custom furniture design
+        - Furniture rental
+        - Furniture delivery and assembly
+        - Furniture repair and restoration
+        - Furniture refinishing
+        - Upholstery services
+        - Furniture sourcing and procurement
+        - Furniture installation
+        - Furniture space planning
+        - Furniture customization
+        - Furniture removal and disposal
+        - Furniture leasing
+        - Furniture trade-ins and buy-backs
+
     ServiceRequestStatus:
       type: object
       properties:
@@ -229,8 +218,7 @@ components:
           - WAITING_FOR_UPDATE
         details:
           type: string
-          description: This field varies depending on the status. For example - quotation
-            is sent with WAITING_FOR_UPDATE status.
+          description: This field varies depending on the status. For example - quotation is sent with WAITING_FOR_UPDATE status.
       example:
         details: details
         status: PENDING

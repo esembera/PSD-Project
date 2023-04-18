@@ -9,7 +9,7 @@ paths:
   /services:
     get:
       summary: Get Electrician Services
-      description: Retrieve a list of available electrician services.
+      description: Retrieve a list of available plumbing services.
       operationId: servicesGET
       responses:
         "200":
@@ -17,7 +17,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ElectricianServices'
+                $ref: '#/components/schemas/PlumbingServices'
       x-swagger-router-controller: Default
   /services/{nameOfService}:
     get:
@@ -194,7 +194,7 @@ components:
         description: description
         durationOfWork: durationOfWork
         serviceName: serviceName
-    ElectricianServices:
+    PlumbingServices:
       type: array
       items:
         type: string
