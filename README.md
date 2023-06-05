@@ -22,7 +22,7 @@ This is an elicopter view of the process managed by the house renovation company
 - The house renovation company chooses the best offer and sends it to the house holder
 - The house holder accepts or rejects the offer
 - If the offer is accepted, the house renovation company contacts the service provider and the service provider starts the work
-- The process end when the work is finished or when the house holder rejects the offer
+- The process ends when the work is finished or when the house holder rejects the offer
 
 ![Choreography Model](/Choreography.png)
 
