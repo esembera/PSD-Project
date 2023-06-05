@@ -9,6 +9,7 @@ Based on the requests of the client (the householder), contact them and select t
 - Ernest Šembera, 10920794
 
 ## Thought processes, notes
+
 https://docs.google.com/document/d/12CEGEP-12oZSZT4RzRTu5NgYURmtXNZGeAaubvGmLhI/edit?usp=sharing
 
 ## Choreographed process
@@ -20,7 +21,7 @@ This is an elicopter view of the process managed by the house renovation company
 - Ends because the request is not feasible or the house is renovated
 - ...
 
-place here an image of the BPMN Choreography diagram
+![Choreography Model]("./Choreography.png")
 
 # Third party services
 
