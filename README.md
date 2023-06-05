@@ -14,12 +14,15 @@ https://docs.google.com/document/d/12CEGEP-12oZSZT4RzRTu5NgYURmtXNZGeAaubvGmLhI/
 
 ## Choreographed process
 
-(this is a sample text. Revise according to your process)
 This is an elicopter view of the process managed by the house renovation company:
 
-- Starts with the request of the house holder and involves plumbers, electricians, constructors
-- Ends because the request is not feasible or the house is renovated
-- ...
+- Process starts with the request of the house holder
+- The house renovation company contacts the plumber, electrician, constructor, painter, furniture provider or designer, depending on the house holder's request
+- The house renovation company waits for the response of the contacted service provider
+- The house renovation company chooses the best offer and sends it to the house holder
+- The house holder accepts or rejects the offer
+- If the offer is accepted, the house renovation company contacts the service provider and the service provider starts the work
+- The process end when the work is finished or when the house holder rejects the offer
 
 ![Choreography Model](/Choreography.png)
 
