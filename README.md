@@ -21,7 +21,7 @@ This is an elicopter view of the process managed by the house renovation company
 - Ends because the request is not feasible or the house is renovated
 - ...
 
-![Choreography Model]("./Choreography.png")
+![Choreography Model](/Choreography.png)
 
 # Third party services
 
