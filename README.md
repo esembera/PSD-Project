@@ -37,7 +37,7 @@ This is an elicopter view of the process managed by the house renovation company
 
 ## Collaboration Diagram
 
-place here an image of the BPMN Collaboration diagram, where the only white box is for the House Renovation Co, the others will be black-boxes
+![Collaboration Model](/collaboration.png)
 
 ## Executable process
 
