@@ -45,4 +45,4 @@ place here an image of the BPMN diagram corresponding to the executable model of
 
 ## Petri Net
 
-place here the image of the PetriNet corresponding to the House Renovation Co executable model
+![Petri Net](/petrinet.png)
