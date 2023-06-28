@@ -41,7 +41,7 @@ This is an elicopter view of the process managed by the house renovation company
 
 ## Executable process
 
-![Executable Model](/exectuable-collaboration.png)
+![Executable Model](/executable-collaboration.png)
 
 ## Petri Net
 
