@@ -41,7 +41,7 @@ This is an elicopter view of the process managed by the house renovation company
 
 ## Executable process
 
-place here an image of the BPMN diagram corresponding to the executable model of the House Renovation Co process
+![Executable Model](/exectuable-collaboration.png)
 
 ## Petri Net
 

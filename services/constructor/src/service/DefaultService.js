@@ -26,7 +26,7 @@ exports.service_requestIdGET = function (id) {
     var examples = {};
     examples["application/json"] = {
       details: "details",
-      status: "PENDING",
+      status: "DONE",
     };
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);
@@ -86,7 +86,7 @@ exports.servicesNameOfServiceGET = function (nameOfService) {
   return new Promise(function (resolve, reject) {
     var examples = {};
     examples["application/json"] = {
-      cost: 0.8008282,
+      cost: 150,
       description: "description",
       durationOfWork: "durationOfWork",
       serviceName: "serviceName",
